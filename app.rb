@@ -6,21 +6,26 @@ require "json"
 
 api_key = ENV.fetch("EXCHANGE_RATE_KEY")
 
-# Getting all available currencies
-raw_response = HTTP.get("https://api.exchangerate.host/list?access_key=#{api_key}")
-parsed_response = JSON.parse(raw_response)
-avail_currencies = parsed_response["currencies"]
-# pp avail_currencies
-
-
 get("/") do
+  # Getting all available currencies
+  raw_response = HTTP.get("https://api.exchangerate.host/list?access_key=#{api_key}")
+  parsed_response = JSON.parse(raw_response)
+  avail_currencies = parsed_response["currencies"]
+  # pp avail_currencies
+
   @abbreviated_currencies = avail_currencies.keys
   # pp @abbreviated_currencies
   erb(:homepage)
 end
 
 get("/:first_currency_route") do
-  @abbreviated_currencies = avail_currencies.keys
+  # Getting all available currencies
+  raw_response = HTTP.get("https://api.exchangerate.host/list?access_key=#{api_key}")
+  parsed_response = JSON.parse(raw_response)
+  avail_currencies = parsed_response["currencies"]
+  # pp avail_currencies
+
+@abbreviated_currencies = avail_currencies.keys
   @first_currency = params["first_currency_route"]
   erb(:second_currency_page)
 end
