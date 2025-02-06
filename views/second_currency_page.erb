@@ -1,0 +1,13 @@
+<h1>Convert <%= @first_currency %></h1>
+
+<p>Go <a href="/">back</a>.</p>
+
+<div>
+  <ul>
+    <% @abbreviated_currencies.each do |abbreviation| %>
+    <% second_currency_path = "/#{@first_currency}/#{abbreviation}" %>
+    <li><a href=<%= second_currency_path %>>Convert 1 <%= @first_currency %> to <%= abbreviation %> ...</a></li>
+    <% end %>
+    </ul>
+
+</div>
